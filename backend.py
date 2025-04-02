@@ -20,7 +20,7 @@ class PDF(FPDF):
         # self.cell(0, 10, "Om Tours and Travel", align="C", ln=1)
         self.set_font("Arial", 'B', 15)
         # Add header text
-        self.cell(0, 10, "Om Tours and Travel", ln=1, align="C")
+        self.cell(0, 10, "Itinero", ln=1, align="C")
         # Add a line below the header
         self.line(10, 20, 200, 20)  
         self.ln(5)
@@ -53,7 +53,7 @@ def generate_itinerary(source, destination, duration, budget, preferences,trip_t
     prompt = (
         f"Generate a detailed {duration}-day travel itinerary from {source} to {destination} "
         f"with a budget of Rs. {budget}. Preferences: {preferences}.  Trip type: {trip_type}. "
-        f"Format the itinerary with 'Day X:' followed by activities for each day and then followed by each day budget as 'Day X Budget: Rs. Y'. "
+        f"Format the itinerary with 'Day X:' followed by activities for each day wirh time slots divided as 'Day X HH:MM AM OR PM : Do Z' and then at the end of the itinerary followed by each day budget as 'Day X Budget: Rs. Y' in a table like formatting. "
         f"Include travel tips and local cuisine recommendations. "
         f"Use plain text and avoid Markdown or bullet points."
     )
