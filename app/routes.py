@@ -144,3 +144,23 @@ def delete_itinerary(current_user, trip_id):
     except Exception as e:
         db.session.rollback()
         return jsonify({'message': 'Failed to delete itinerary!', 'error': str(e)}), 500
+    
+@main_bp.route('/itineraries/<int:trip_id>', methods=['PUT'])
+@token_required
+def update_tripName(current_user, trip_id):
+    itinerary = Itinerary.query.get(trip_id)
+    if not itinerary:
+        return jsonify({'message': 'Itinerary not found!'}), 404
+    
+    if itinerary.user_id != current_user.id:
+        return jsonify({'message': 'Forbidden: You do not have access to this itinerary'}), 403
+    
+    data = request.get_json()
+    new_name = data.get('trip_name')
+
+    if not new_name:
+        return jsonify({'message': 'MISSING trip_name in request body'}), 400
+    
+    itinerary.trip_name = new_name
+    db.session.commit()
+    return jsonify({'message': 'Itinerary name updated successfully!'}), 200

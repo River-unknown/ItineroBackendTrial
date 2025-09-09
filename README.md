@@ -13,10 +13,19 @@ This is the Flask backend for an AI-powered travel itinerary planner. It provide
 
 ---
 
+## Core Features
+- Secure user registration and login with JWT authentication.
+- AI-powered itinerary generation based on user input (city, duration, interests).
+- Full CRUD (Create, Read, Update, Delete) API endpoints for managing itineraries.
+- Ownership rules to ensure users can only access their own data.
+- Professional, modular project structure using Flask Blueprints and an Application Factory.
+
+---
+
 ## How to Run This Project
 
 1.  **Clone the repo:**
-    `git clone <your-repo-url>`
+    `git clone https://github.com/River-unknown/ItineroBackendTrial.git`
 2.  **Create your environment file:**
     `cp .env.example .env`
 3.  **Edit the `.env` file:** Add your `SECRET_KEY`, `API_KEY`, and a strong `POSTGRES_PASSWORD`.
