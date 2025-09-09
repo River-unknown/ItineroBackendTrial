@@ -1,3 +1,11 @@
-venv/
-itinero/
+/venv/
+/.venv/
+
+__pycache__/
+*.pyc
+
+.vscode/
+.DS_Store
+/itinero/
 .env
+config.py
