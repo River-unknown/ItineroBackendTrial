@@ -27,7 +27,7 @@ This is the Flask backend for an AI-powered travel itinerary planner. It provide
 ## How to Run This Project
 
 1.  **Clone the repo:**
-    `git clone https://github.com/River-unknown/ItineroBackendTrial.git`
+    `git clone -b persistence https://github.com/River-unknown/ItineroBackendTrial.git`
 2.  **Create your environment file:**
     `cp .env.example .env`
 3.  **Edit the `.env` file:** Add your `SECRET_KEY`, `API_KEY`, and a strong `POSTGRES_PASSWORD`.
