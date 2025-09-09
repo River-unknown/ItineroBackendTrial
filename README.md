@@ -1,5 +1,7 @@
 # Itinero - AI Travel Planner Backend
 
+> **Version:** 1.0.0 (Feature-Complete Backend)
+
 This is the Flask backend for an AI-powered travel itinerary planner. It provides a secure API for user authentication and dynamically generates travel plans using the Google Gemini API, saving all data to a PostgreSQL database.
 
 ---
