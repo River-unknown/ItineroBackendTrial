@@ -110,3 +110,37 @@ def get_itineraries(current_user):
         }
         output.append(itinerary_data)
     return jsonify({'itineraries': output}), 200
+
+@main_bp.route('/itineraries/<int:trip_id>', methods=['GET'])
+@token_required
+def get_itinerary(current_user, trip_id):
+    itinerary = Itinerary.query.get(trip_id)
+    if not itinerary:
+        return jsonify({'message': 'Itinerary not found!'}), 404
+    
+    if itinerary.user_id != current_user.id:
+        return jsonify({'message': 'Forbidden: You do not have access to this itinerary'}), 403
+    dest_list = [{'destination_id':d.id,'location_name':d.location_name,'notes':d.notes,'day':d.day} for d in itinerary.destinations]
+    itinerary_data = {
+        'itinerary_id': itinerary.id,
+        'trip_name': itinerary.trip_name,
+        'destinations': dest_list
+    }
+    return jsonify({'itinerary': itinerary_data}), 200
+
+@main_bp.route('/itineraries/<int:trip_id>', methods=['DELETE'])
+@token_required
+def delete_itinerary(current_user, trip_id):
+    itinerary = Itinerary.query.get(trip_id)
+    if not itinerary:
+        return jsonify({'message': 'Itinerary not found!'}), 404
+    
+    if itinerary.user_id != current_user.id:
+        return jsonify({'message': 'Forbidden: You do not have access to this itinerary'}), 403
+    try:
+        db.session.delete(itinerary)
+        db.session.commit()
+        return jsonify({'message': 'Itinerary deleted successfully!'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'message': 'Failed to delete itinerary!', 'error': str(e)}), 500
